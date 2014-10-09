@@ -11,7 +11,7 @@
     </session-config>
     <display-name>blog</display-name>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>IndexPageServlet</welcome-file>
     </welcome-file-list>
     <context-param>
         <param-name>dbKullaniciAdi</param-name>
@@ -23,7 +23,7 @@
     </context-param>
     <context-param>
         <param-name>dbPath</param-name>
-        <param-value>jdbc:mysql://localhost:3306/basit_blog</param-value>
+        <param-value>jdbc:mysql://localhost:3306/basit_blog?useEncoding=true&amp;characterEncoding=UTF-8</param-value>
     </context-param>
     <filter>
         <filter-name>LoginFilter</filter-name>
@@ -32,5 +32,7 @@
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/index.jsp</url-pattern>
+        <url-pattern>/blog/*</url-pattern>
     </filter-mapping>
+
 </web-app>

@@ -15,31 +15,26 @@ public class LoginFilter implements Filter {
 
     @Override
     public void destroy() {
-		// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
             FilterChain chain) throws IOException, ServletException {
-       
+
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-        System.out.println("Filtre çalıştı");
         if (req.getSession(false) == null) {
             req.setAttribute("hataMesaji", "Lütfen Giriş Yapın");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
-        } else {
-            System.out.println("session zaten var");
         }
         chain.doFilter(servletRequest, servletResponse);
-
     }
 
     @Override
     public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
+        // TODO Auto-generated method stub
 
     }
-
 }

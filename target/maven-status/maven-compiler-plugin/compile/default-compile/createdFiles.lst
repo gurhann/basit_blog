@@ -12,6 +12,5 @@ com/blog/servlets/RegisterServlet.class
 com/gurhan/blog/util/MD5Hash.class
 com/blog/servlets/ProfilServlet.class
 com/gurhan/blog/model/Yorum.class
-com/gurhan/blog/filters/RegisterFilter.class
 com/gurhan/blog/servlets/IndexPageServlet.class
 com/gurhan/blog/listeners/AppListener.class

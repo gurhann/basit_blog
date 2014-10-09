@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
+    <title>Blog Yazısı</title>
 </head>
 <script type="text/javascript">
     function aktifMi() {
@@ -34,7 +34,6 @@
         <textarea rows="2" cols="60" name="yorum" id="yorum" onkeyup="aktifMi();
                                 return false;"></textarea>
         <input type="submit" value="Yorum Yap" id="submitButton" />
-        <input type="hidden" value="${post.yazarID}" name="yazarID" />
         <input type="hidden" value="${post.blogID}" name="blogID" />
     </div>
 </form>

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.gurhan.blog.servlets;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -17,23 +18,25 @@ import com.gurhan.blog.dao.DAOManager;
 import com.gurhan.blog.model.Kullanici;
 
 @WebServlet("/AddPostServlet")
-public class AddPostServlet extends HttpServlet{
-	
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		String blogBaslik = req.getParameter("blogBaslik");
-		String blogIcerik = req.getParameter("blogIcerik");
-		int yazarID = ((Kullanici)req.getSession(false).getAttribute("user")).getKullaniciID();
-		try {
-			DAOManager.dao.addBlogPost(blogBaslik, blogIcerik, yazarID);
-			resp.sendRedirect("IndexPageServlet");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+public class AddPostServlet extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        resp.setCharacterEncoding("utf-8");
+        String blogBaslik = req.getParameter("blogBaslik");
+        String blogIcerik = req.getParameter("blogIcerik");
+        int yazarID = ((Kullanici) req.getSession(false).getAttribute("user")).getKullaniciID();
+        try {
+            DAOManager.dao.addBlogPost(blogBaslik, blogIcerik, yazarID);
+            resp.sendRedirect("IndexPageServlet");
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
 }

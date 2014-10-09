@@ -15,29 +15,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.gurhan.blog.dao.DAOManager;
+import com.gurhan.blog.model.Kullanici;
 import com.gurhan.blog.model.Yorum;
 
 @WebServlet("/AddCommentServlet")
-public class AddCommentServlet extends HttpServlet{
+public class AddCommentServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		Yorum comment = new Yorum();
-		comment.setBlogID(Integer.parseInt(req.getParameter("blogID")));
-		comment.setYazarID(Integer.parseInt(req.getParameter("yazarID")));
-		comment.setIcerik(req.getParameter("yorum"));
-		
-		try {
-			DAOManager.dao.addComment(comment);
-			resp.sendRedirect("PostPageServlet?post_id="+comment.getBlogID());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        resp.setCharacterEncoding("utf-8");
+        Yorum comment = new Yorum();
+        comment.setBlogID(Integer.parseInt(req.getParameter("blogID")));
+        comment.setYazarID(((Kullanici)req.getSession(false).getAttribute("user")).getKullaniciID());
+        comment.setIcerik(req.getParameter("yorum"));
+
+        try {
+            DAOManager.dao.addComment(comment);
+            resp.sendRedirect("PostPageServlet?post_id=" + comment.getBlogID());
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }
-

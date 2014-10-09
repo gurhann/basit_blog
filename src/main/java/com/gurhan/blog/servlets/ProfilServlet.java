@@ -14,23 +14,25 @@ import com.gurhan.blog.dao.DAOManager;
 import com.gurhan.blog.model.Blog;
 
 @WebServlet("/ProfilServlet")
-public class ProfilServlet extends HttpServlet{
+public class ProfilServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		int userID = Integer.parseInt(req.getParameter("user_id"));
-		try {
-			ArrayList<Blog> allPosts = DAOManager.dao.postsByUserID(userID);
-			req.setAttribute("posts", allPosts);
-			req.setAttribute("authorName", DAOManager.dao.getAuthorName(userID));
-			req.getRequestDispatcher("/blog/profil.jsp").forward(req, resp);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
+        resp.setCharacterEncoding("utf-8");
+        int userID = Integer.parseInt(req.getParameter("user_id"));
+        try {
+            ArrayList<Blog> allPosts = DAOManager.dao.postsByUserID(userID);
+            req.setAttribute("posts", allPosts);
+            req.setAttribute("authorName", DAOManager.dao.getAuthorName(userID));
+            req.getRequestDispatcher("/blog/profil.jsp").forward(req, resp);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
 }
-
